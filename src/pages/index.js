@@ -20,16 +20,7 @@ export default function Home({ sales }) {
   //variables for Supabase auth:
   const session = useSession();
   const supabase = useSupabaseClient();
-  //function to sign out of Supabase auth.
-  const signOut = async () => await supabase.auth.signOut();
-  //handleClick funciton to confirm whether user wants to sign out. Confirmation handled by window.confirm.
-  const handleSignOutClick = () => {
-    if (window.confirm("Are you sure you want to sign out?")) {
-      signOut();
-    }
-  };
 
-  console.log(sales);
   //test variable to get a single row of data from the sales array.
   const singleRow = sales[0];
   console.log(singleRow);
@@ -75,7 +66,7 @@ export default function Home({ sales }) {
           />
         </div>
       ) : (
-        <div className="w-full flex flex-col h-screen justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center">
           <h1 className="text-center">Home Page</h1>
           <table className="table-auto border-collapse border border-slate-400 ">
             <thead className="text-center text-sm ">
@@ -111,12 +102,6 @@ export default function Home({ sales }) {
               </tr>
             </tbody>
           </table>
-          <button
-            onClick={handleSignOutClick}
-            className="border border-slate-500 rounded-md px-5 py-2 m-5 text-sm bg-emerald-600 text-white"
-          >
-            Sign Out
-          </button>
         </div>
       )}
     </>
