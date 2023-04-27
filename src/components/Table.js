@@ -11,7 +11,7 @@ const options = {
 //React component that accepts data as a parameter and displays a table of the data.
 //The data is an array of objects. Each object is a row in the table.
 //The keys of the objects are the column names and the values are the data for the row.
-export default function Table({ data }) {
+export default function Table({ data, title }) {
   // sort the data based on the value of order
   data.sort((a, b) => {
     return b.order - a.order;
@@ -19,7 +19,7 @@ export default function Table({ data }) {
   return (
     <div>
       <h1 className="text-sm mb-2 justify-self-start ml-1/5 mr-auto">
-        Pipeline Total
+        {title}
       </h1>
       <div className="overflow-x-auto mb-5 flex flex-col justify-center border rounded-sm border-primary">
         <table className="table table-compact table-zebra w-full">

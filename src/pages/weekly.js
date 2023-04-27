@@ -1,10 +1,13 @@
 import React from "react";
 import supabase from "../lib/supabaseClient";
 import Table from "@/components/Table";
+import Changes from "@/components/Changes";
 //Page for the weekly view of the total pipeline data. Includes two tables.
 //One for the most recent week and one for the previous week.
 
 export default function Weekly({ weekOne, weekTwo }) {
+  console.log(weekOne);
+  console.log(weekTwo);
   //function to convert string to date
   const date = weekOne[0].date;
   const dateOptions = { weekday: "short", month: "short", day: "numeric" };
@@ -35,11 +38,10 @@ export default function Weekly({ weekOne, weekTwo }) {
       </div>
 
       {/* First Table */}
-      <Table data={weekOne} />
+      <Table data={weekOne} title={'Pipeline Total'} />
 
-      {/* Second Table */}
-      <Table data={weekTwo} />
-      {/* Third Table */}
+      {/* Second Table showing changes */}
+      <Changes weekTwo={weekTwo} weekOne={weekOne} />
     </div>
   );
 }
