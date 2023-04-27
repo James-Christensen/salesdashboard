@@ -1,13 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import supabase from "../lib/supabaseClient";
-//Supabase auth imports
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import {useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Navbar({ title }) {
-  const session = useSession();
+
   const supabase = useSupabaseClient();
   //function to sign out of Supabase auth.
   const signOut = async () => await supabase.auth.signOut();
@@ -35,6 +31,12 @@ export default function Navbar({ title }) {
                 tabIndex={0}
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
+                <Link
+                  href="/weekly"
+                  className="btn btn-ghost text-primary-content btn-sm rounded-btn"
+                >
+                  Weekly Pipeline
+                </Link>
                 <Link
                   href="/"
                   className="btn btn-ghost text-primary-content btn-sm rounded-btn"

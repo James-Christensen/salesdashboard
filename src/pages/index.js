@@ -14,8 +14,6 @@ const options = {
   maximumFractionDigits: 2,
 };
 
-//date options for formatting string to date
-
 export default function Home({ sales }) {
   //variables for Supabase auth:
   const session = useSession();
