@@ -31,7 +31,7 @@ export default function Table({ data, title }) {
                   (key) => key !== "id" && key !== "date" && key !== "order"
                 )
                 .map((key) => (
-                  <th className="text-center text-xs" key={key}>
+                  <th className="text-center text-xs w-40" key={key}>
                     {key.replaceAll("_", " ")}
                   </th>
                 ))}

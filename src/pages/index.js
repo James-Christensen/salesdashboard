@@ -5,6 +5,16 @@ import supabase from "../lib/supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 //options to convert number to formatted US dollar currency
 const options = {
@@ -18,34 +28,19 @@ export default function Home({ sales }) {
   //variables for Supabase auth:
   const session = useSession();
   const supabase = useSupabaseClient();
-
+  console.log(sales);
   //test variable to get a single row of data from the sales array.
   const singleRow = sales[0];
-  console.log(singleRow);
-  //destructure the singleRow object to get the data for id, product, segment.
-  const {
-    id,
-    product,
-    segment,
-    date,
-    meeting_demo,
-    needs_analysis,
-    negotiation_review,
-    pipeline_total,
-    proposal_price_quote,
-    prospecting,
-    qualification,
-    closed_won,
-    closed_lost,
-  } = singleRow;
 
-  //function to convert string to date
-  const dateOptions = { weekday: "short", month: "short", day: "numeric" };
-  const localOffset = new Date().getTimezoneOffset() * 60000; // Get the local timezone offset in milliseconds
-  const formattedDate = new Date(`${date}T00:00:00`).toLocaleString("en-US", {
-    ...dateOptions,
-    timeZone: "UTC",
-  });
+  //Array of all pipeline_totals for each week in the sales array.
+  const pipelineTotals = sales.map((row) =>
+    row.pipeline_total.toLocaleString("en-US", options)
+  );
+  //array containing the unique values for dates in the sales array.
+  const weeks = sales.map((row) => row.date);
+  //remove duplicate values from weeks array
+  const uniqueWeeks = [...new Set(weeks)];
+  console.log(uniqueWeeks);
   return (
     <>
       <Head>
@@ -66,40 +61,32 @@ export default function Home({ sales }) {
       ) : (
         <div className="w-full flex flex-col justify-center items-center">
           <h1 className="text-center">Home Page</h1>
-          <table className="table-auto border-collapse border border-slate-400 ">
-            <thead className="text-center text-sm ">
-              <tr>
-                <th className="border border-slate-300 px-2">Week Ending</th>
-                <th className="border border-slate-300 px-2">Product</th>
-                <th className="border border-slate-300 px-2">Segment</th>
-                <th className="border border-slate-300 px-2">Prospecting</th>
-                <th className="border border-slate-300 px-2">Qualification</th>
-                <th className="border border-slate-300 px-2">Needs Analysis</th>
-                <th className="border border-slate-300 px-2">Meeting Demo</th>
-                <th className="border border-slate-300 px-2">Proposal</th>
-                <th className="border border-slate-300 px-2">Negotiation</th>
-                <th className="border border-slate-300 px-2">Pipeline Total</th>
-                <th className="border border-slate-300 px-2">Closed Won</th>
-                <th className="border border-slate-300 px-2">Closed Lost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="text-xs text-center px-2">
-                <td>{formattedDate}</td>
-                <td>{product}</td>
-                <td>{segment}</td>
-                <td>{prospecting.toLocaleString("en-US", options)}</td>
-                <td>{qualification.toLocaleString("en-US", options)}</td>
-                <td>{needs_analysis.toLocaleString("en-US", options)}</td>
-                <td>{meeting_demo.toLocaleString("en-US", options)}</td>
-                <td>{proposal_price_quote.toLocaleString("en-US", options)}</td>
-                <td>{negotiation_review.toLocaleString("en-US", options)}</td>
-                <td>{pipeline_total.toLocaleString("en-US", options)}</td>
-                <td>{closed_won.toLocaleString("en-US", options)}</td>
-                <td>{closed_lost.toLocaleString("en-US", options)}</td>
-              </tr>
-            </tbody>
-          </table>
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart
+              data={sales}
+              width={500}
+              height={300}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="week"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
+              <Line type="monotone" dataKey="pipeline_total" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       )}
     </>
