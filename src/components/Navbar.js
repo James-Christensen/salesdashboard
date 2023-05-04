@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import {useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Navbar({ title }) {
-
   const supabase = useSupabaseClient();
   //function to sign out of Supabase auth.
   const signOut = async () => await supabase.auth.signOut();
@@ -38,10 +37,10 @@ export default function Navbar({ title }) {
                   Weekly Pipeline
                 </Link>
                 <Link
-                  href="/"
+                  href="/progress"
                   className="btn btn-ghost text-primary-content btn-sm rounded-btn"
                 >
-                  APM Solutions
+                  Month & YTD
                 </Link>
                 <Link
                   href="/"
