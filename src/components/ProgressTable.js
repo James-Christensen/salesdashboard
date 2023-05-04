@@ -16,6 +16,7 @@ const { currentMonth, currentMonthRatio } = getCurrentMonthAndRatio();
 //Current Month is broken into the following columns: Acutal, Forecast, Target, Forecast: Target, and Actual:Target.
 //The YTD columns are 2023 YTD, 2023 Financial Target, and YTD Progress Percent.
 export default function ProgressTable({ targets, results, forecast }) {
+  console.log(forecast);
   const {
     Contract: contract,
     "Non-Contract": non_contract,
@@ -28,9 +29,7 @@ export default function ProgressTable({ targets, results, forecast }) {
   const MIPS_progress =
     contract.progress + non_contract.progress + indirect.progress;
   const MIPS_monthly_progress =
-    results[0][currentMonth] +
-    results[1][currentMonth] +
-    results[2][currentMonth];
+    forecast[0].Current + forecast[1].Current + forecast[2].Current;
   const MIPS_monthly_target =
     targets[0][currentMonth] +
     targets[1][currentMonth] +
@@ -68,7 +67,7 @@ export default function ProgressTable({ targets, results, forecast }) {
           <tr className="text-center text-xs">
             <td className="text-center text-xs">Contract</td>
             <td className="text-center text-xs">
-              {results[0][currentMonth].toLocaleString("en-US", options)}
+              {forecast[0].Current.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {forecast[0].Forecast.toLocaleString("en-US", options)}
@@ -83,10 +82,9 @@ export default function ProgressTable({ targets, results, forecast }) {
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {(
-                (results[0][currentMonth] / targets[0][currentMonth]) *
-                100
-              ).toFixed(0) + "%"}
+              {((forecast[0].Current / targets[0][currentMonth]) * 100).toFixed(
+                0
+              ) + "%"}
             </td>
             <td className="text-center text-xs">
               {results[0].segment_total.toLocaleString("en-US", options)}
@@ -101,7 +99,7 @@ export default function ProgressTable({ targets, results, forecast }) {
           <tr className="text-center text-xs">
             <td className="text-center text-xs">Non-Contract</td>
             <td className="text-center text-xs">
-              {results[1][currentMonth].toLocaleString("en-US", options)}
+              {forecast[1].Current.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {forecast[1].Forecast.toLocaleString("en-US", options)}
@@ -116,10 +114,9 @@ export default function ProgressTable({ targets, results, forecast }) {
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {(
-                (results[1][currentMonth] / targets[1][currentMonth]) *
-                100
-              ).toFixed(0) + "%"}
+              {((forecast[0].Current / targets[1][currentMonth]) * 100).toFixed(
+                0
+              ) + "%"}
             </td>
             <td className="text-center text-xs">
               {results[1].segment_total.toLocaleString("en-US", options)}
@@ -134,7 +131,7 @@ export default function ProgressTable({ targets, results, forecast }) {
           <tr className="text-center text-xs">
             <td className="text-center text-xs">Indirect</td>
             <td className="text-center text-xs">
-              {results[2][currentMonth].toLocaleString("en-US", options)}
+              {forecast[2].Current.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {forecast[2].Forecast.toLocaleString("en-US", options)}
@@ -149,10 +146,9 @@ export default function ProgressTable({ targets, results, forecast }) {
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {(
-                (results[2][currentMonth] / targets[2][currentMonth]) *
-                100
-              ).toFixed(0) + "%"}
+              {((forecast[2].Current / targets[2][currentMonth]) * 100).toFixed(
+                0
+              ) + "%"}
             </td>
             <td className="text-center text-xs">
               {results[2].segment_total.toLocaleString("en-US", options)}
@@ -198,7 +194,7 @@ export default function ProgressTable({ targets, results, forecast }) {
           <tr className="text-center text-xs">
             <td className="text-center text-xs">APM Solutions</td>
             <td className="text-center text-xs">
-              {results[3][currentMonth].toLocaleString("en-US", options)}
+              {forecast[3].Current.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {forecast[3].Forecast.toLocaleString("en-US", options)}
@@ -213,10 +209,9 @@ export default function ProgressTable({ targets, results, forecast }) {
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {(
-                (results[3][currentMonth] / targets[3][currentMonth]) *
-                100
-              ).toFixed(0) + "%"}
+              {((forecast[3].Current / targets[3][currentMonth]) * 100).toFixed(
+                0
+              ) + "%"}
             </td>
             <td className="text-center text-xs">
               {results[3].segment_total.toLocaleString("en-US", options)}
@@ -231,7 +226,7 @@ export default function ProgressTable({ targets, results, forecast }) {
           <tr className="text-center text-xs">
             <td className="text-center text-xs">Total Bookings</td>
             <td className="text-center text-xs">
-              {results[4][currentMonth].toLocaleString("en-US", options)}
+              {forecast[4].Current.toLocaleString("en-US", options)}
             </td>
             <td className="text-center text-xs">
               {forecast[4].Forecast.toLocaleString("en-US", options)}
@@ -246,10 +241,9 @@ export default function ProgressTable({ targets, results, forecast }) {
               ).toFixed(0) + "%"}
             </td>
             <td className="text-center text-xs">
-              {(
-                (results[4][currentMonth] / targets[4][currentMonth]) *
-                100
-              ).toFixed(0) + "%"}
+              {((forecast[4].Current / targets[4][currentMonth]) * 100).toFixed(
+                0
+              ) + "%"}
             </td>
             <td className="text-center text-xs">
               {results[4].segment_total.toLocaleString("en-US", options)}

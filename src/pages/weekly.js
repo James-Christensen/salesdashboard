@@ -28,7 +28,7 @@ export default function Weekly({ weekOne, weekTwo }) {
   return (
     <div className="flex flex-col w-full md:w-10/12 justify-center align-middle h-full items-center mx-auto">
       {/* Title for Page */}
-      <div className="mb-5">
+      <div className="mb-1">
         <h1 className="text-center w-full">
           Pipeline: Week Ending {formattedDate}
         </h1>
