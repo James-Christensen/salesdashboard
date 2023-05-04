@@ -16,7 +16,6 @@ const { currentMonth, currentMonthRatio } = getCurrentMonthAndRatio();
 //Current Month is broken into the following columns: Acutal, Forecast, Target, Forecast: Target, and Actual:Target.
 //The YTD columns are 2023 YTD, 2023 Financial Target, and YTD Progress Percent.
 export default function ProgressTable({ targets, results, forecast }) {
-  console.log(forecast);
   const {
     Contract: contract,
     "Non-Contract": non_contract,

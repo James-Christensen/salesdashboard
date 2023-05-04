@@ -87,6 +87,7 @@ export default function Home({ sales }) {
               <Line type="monotone" dataKey="pipeline_total" stroke="#82ca9d" />
             </LineChart>
           </ResponsiveContainer>
+          
         </div>
       )}
     </>

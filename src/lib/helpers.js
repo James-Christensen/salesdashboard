@@ -58,3 +58,24 @@ export const options = {
   minimumFractionDigits: 0,
   maximumFractionDigits: 0,
 };
+
+export function MonthName(monthNum) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return months[monthNum - 1];
+}
+
+const { currentMonth } = getCurrentMonthAndRatio();
+export const Month = MonthName(currentMonth);

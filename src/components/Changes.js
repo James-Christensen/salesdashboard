@@ -120,7 +120,7 @@ function compareAllData(weekOne, weekTwo) {
 export default function Changes({ weekOne, weekTwo }) {
   //create resulting array of objects based on the differences between the two datasets.
   const result = compareData(weekOne, weekTwo);
-  // console.log(result);
+
 
   const resultAll = compareAllData(weekOne, weekTwo);
   console.log(resultAll);

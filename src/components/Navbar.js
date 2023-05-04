@@ -43,10 +43,10 @@ export default function Navbar({ title }) {
                   Month & YTD
                 </Link>
                 <Link
-                  href="/"
+                  href="/update"
                   className="btn btn-ghost text-primary-content btn-sm rounded-btn"
                 >
-                  MIPS Solutions
+                  Add Data
                 </Link>
                 <Link
                   href="/"
