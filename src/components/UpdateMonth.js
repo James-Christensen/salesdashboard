@@ -1,18 +1,21 @@
 import React from "react";
 import { options } from "../lib/helpers";
 
+const formatCurrency = (value) => {
+  const formattedValue = Number(value).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  return formattedValue;
+};
+
 export default function UpdateMonth({ data, onUpdate }) {
   const handleInputChange = (e, order, key) => {
     const value = e.target.value;
-    // Ensure that value is a positive integer
-    if (/^[1-9]\d*$/.test(value) || value === "") {
-      const index = data.findIndex((row) => row.order === order);
-      const newData = [...data];
-      newData[index][key] = value;
-      //may need to remove for database
-      // newData[index][key] = Number(value).toLocaleString("en-US", options);
-      onUpdate(newData);
-    }
+    const index = data.findIndex((row) => row.order === order);
+    const newData = [...data];
+    newData[index][key] = value;
+    onUpdate(newData);
   };
 
   const renderRow = (row) => {

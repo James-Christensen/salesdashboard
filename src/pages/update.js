@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import supabase from "../lib/supabaseClient";
 import { Month } from "../lib/helpers";
-import ForecastTable from "@/components/forecastTable";
+import ForecastTable from "@/components/ForecastTable";
 import UpdateMonth from "@/components/UpdateMonth";
 
 export default function AddData({ data }) {
