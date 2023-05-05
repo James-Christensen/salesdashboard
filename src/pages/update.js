@@ -5,18 +5,55 @@ import ForecastTable from "@/components/ForecastTable";
 import UpdateMonth from "@/components/UpdateMonth";
 
 export default function AddData({ data }) {
-  console.log(data);
+  const [initialData, setInitialData] = useState(
+    JSON.parse(JSON.stringify(data))
+  );
   const [isEditing, setIsEditing] = useState(false);
   const [monthData, setMonthData] = useState(data);
+
+  const hasRowChanged = (original, updated) => {
+    return (
+      original.Forecast !== updated.Forecast ||
+      original.Current !== updated.Current
+    );
+  };
+
+  const updateMonthlyForecast = async (segment, newData) => {
+    const { data, error } = await supabase
+      .from("monthly_forecast")
+      .update(newData)
+      .eq("segment", segment);
+
+    console.log("success");
+
+    if (error) {
+      console.error("Error updating monthly forecast:", error);
+    }
+  };
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     alert("Saving!");
+
+    const updatePromises = monthData.map((item, index) => {
+      if (hasRowChanged(initialData[index], item)) {
+        return updateMonthlyForecast(item.segment, {
+          Forecast: item.Forecast,
+          Current: item.Current,
+        });
+      }
+      return null;
+    });
+
+    await Promise.all(updatePromises);
+
     setIsEditing(!isEditing);
+    setInitialData(JSON.parse(JSON.stringify(monthData)));
   };
+
   const handleInputChange = (newData) => {
     setMonthData(newData);
   };

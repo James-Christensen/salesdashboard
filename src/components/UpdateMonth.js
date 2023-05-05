@@ -1,17 +1,9 @@
 import React from "react";
 import { options } from "../lib/helpers";
 
-const formatCurrency = (value) => {
-  const formattedValue = Number(value).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-  return formattedValue;
-};
-
 export default function UpdateMonth({ data, onUpdate }) {
   const handleInputChange = (e, order, key) => {
-    const value = e.target.value;
+    const value = Number(e.target.value); // convert value to number
     const index = data.findIndex((row) => row.order === order);
     const newData = [...data];
     newData[index][key] = value;
