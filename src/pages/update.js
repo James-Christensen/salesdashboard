@@ -3,6 +3,7 @@ import supabase from "../lib/supabaseClient";
 import { Month } from "../lib/helpers";
 import ForecastTable from "@/components/ForecastTable";
 import UpdateMonth from "@/components/UpdateMonth";
+const monthColumnName = `${new Date().getMonth() + 1}`;
 
 export default function AddData({ data }) {
   const [initialData, setInitialData] = useState(

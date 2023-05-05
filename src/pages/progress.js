@@ -5,6 +5,7 @@ import ProgressTable from "../components/ProgressTable";
 //Page displays one large table. The table is split into two sections.
 //The first section is for the current month and the second is for the year to date.
 export default function Progress({ targets, results, forecast }) {
+  console.log(results);
   return (
     <div className="flex flex-col w-full md:w-10/12 justify-center align-middle h-full items-center mx-auto">
       <h1 className="text-center w-full mb-5">Month & Year Progress</h1>

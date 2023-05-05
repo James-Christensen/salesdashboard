@@ -7,6 +7,20 @@ export default function UpdateMonth({ data, onUpdate }) {
     const index = data.findIndex((row) => row.order === order);
     const newData = [...data];
     newData[index][key] = value;
+    // Update the Grand Total
+    if (order !== 0) {
+      const totalCurrent = newData
+        .filter((row) => row.order !== 0)
+        .reduce((acc, row) => acc + row.Current, 0);
+      const totalForecast = newData
+        .filter((row) => row.order !== 0)
+        .reduce((acc, row) => acc + row.Forecast, 0);
+
+      const grandTotalIndex = newData.findIndex((row) => row.order === 0);
+      newData[grandTotalIndex].Current = totalCurrent;
+      newData[grandTotalIndex].Forecast = totalForecast;
+    }
+
     onUpdate(newData);
   };
 
